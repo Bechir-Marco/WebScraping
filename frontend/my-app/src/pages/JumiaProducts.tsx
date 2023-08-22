@@ -24,7 +24,7 @@ const ProductListPage = () => {
         </Col>
         <Col md={9} style={{ marginBottom: '80px' }} className="text-center">
           <JumiaProductForListComponent />
-          <PaginationComponent />
+          <PaginationComponent/>
         </Col>
       </Row>
     </Container>

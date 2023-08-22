@@ -22,7 +22,7 @@ const ProductListPage = () => {
         </Col>
         <Col md={9} style={{ marginBottom: '80px' }} className="text-center">
           <MytekProductForListComponent  />
-          <PaginationComponent />
+          <PaginationComponent/>
         </Col>
       </Row>
     </Container>

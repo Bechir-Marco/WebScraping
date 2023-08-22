@@ -77,16 +77,14 @@ const ProductDetailsPage = () => {
               <Col md={8}>
                 <ListGroup variant="flush">
                   <ListGroup.Item>
-                    <h1>{productData?.title ?? ''}</h1>
+                    <h2>Title:</h2>
+                    <h3 style={{ color: '#536878' }}>{productData?.title ?? '' }</h3>
                   </ListGroup.Item>
                   <h2>Description</h2>
                   <ListGroup.Item>
                     {productData?.description ?? ''}
                   </ListGroup.Item>
-                  <h2>Fiche Technique</h2>
-                  <ListGroup.Item>
-                    {productData?.fiche_technique ?? ''}
-                  </ListGroup.Item>
+                  
                 </ListGroup>
               </Col>
               

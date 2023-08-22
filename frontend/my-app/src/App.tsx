@@ -14,6 +14,7 @@ import MytekItemPage from './pages/MytekItemPage';
 import TunisiaNetItemPage from './pages/TunisiaNetItemPage';
 import Home from './pages/Home';
 import ScrollTop from './utils/scrollTop';
+import PaginationComponent from './components/PaginationComponent';
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/jumia/" element={<Jumia />} />
           <Route path="/tunisiaNet/" element={<TunisiaNet />} />
           <Route path="/alkitab/" element={<Alkitab />} />
+          
           <Route path="/mytek" element={<Mytek />} />
            
            <Route path="/jumia/:search/" element={<Jumia />} />

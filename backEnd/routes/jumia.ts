@@ -10,7 +10,7 @@ router.get(`/`, async (req: Request, res: Response) => {
     let query = {};
     let queryCondition = false
 
-    const pageSize = 10; 
+    const pageSize = 20; 
     const page = parseInt(req.query.page as string) || 1;
     const totalItems = await jumia.countDocuments();
     const totalPages = Math.ceil(totalItems / pageSize);

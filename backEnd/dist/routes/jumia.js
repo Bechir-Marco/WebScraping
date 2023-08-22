@@ -19,7 +19,7 @@ router.get(`/`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let query = {};
         let queryCondition = false;
-        const pageSize = 10;
+        const pageSize = 20;
         const page = parseInt(req.query.page) || 1;
         const totalItems = yield jumia_1.default.countDocuments();
         const totalPages = Math.ceil(totalItems / pageSize);

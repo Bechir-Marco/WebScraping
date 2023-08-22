@@ -19,7 +19,7 @@ router.get(`/`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let query = {};
         let queryCondition = false;
-        const pageSize = 10;
+        const pageSize = 20;
         const page = parseInt(req.query.page) || 1;
         const totalItems = yield alKitab_1.default.countDocuments();
         const totalPages = Math.ceil(totalItems / pageSize);
@@ -35,7 +35,11 @@ router.get(`/`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             queryCondition = true;
             const escapedCategoryName = categoryName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             const regexPattern = new RegExp(escapedCategoryName, 'i');
-            categoryCondition = { category: regexPattern };
+            categoryCondition = {
+                $or: [
+                    { category: regexPattern }, { description: regexPattern }
+                ]
+            };
         }
         const searchQuery = req.query.search || '';
         let searchQuertCondition = {};
@@ -55,7 +59,7 @@ router.get(`/`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             query = {
                 $and: [
                     categoryCondition,
-                    searchQuertCondition
+                    searchQuertCondition,
                 ]
             };
         }
