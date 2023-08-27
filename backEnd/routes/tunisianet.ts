@@ -28,10 +28,17 @@ router.get(`/`, async (req: Request, res: Response) => {
     const categoryName = req.query.categoryName as string || '';
     if (categoryName) {
       queryCondition = true;
-      const escapedCategoryName = categoryName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regexPattern = new RegExp(escapedCategoryName, 'i');
-      categoryCondition = { category: regexPattern };
+      const searchTerms = categoryName.split(/\s+/).map(term => {
+        return term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      });
+      const regexPattern = new RegExp(searchTerms.join('|'), 'i');
+      categoryCondition = {
+        $or: [
+          { category: regexPattern }, { description: regexPattern }
+        ]
+      };
     }
+
 
 
     const searchQuery = req.query.search as string || '';
@@ -81,56 +88,7 @@ router.get(`/`, async (req: Request, res: Response) => {
   }
 });
 
-router.get(`/search`, async (req: Request, res: Response) => {
-  try {
-    let query = {};
-    let queryCondition = false;
-    const pageSize = 10;
-    const page = parseInt(req.query.page as string) || 1;
-    const totalItems = await tunisianet.countDocuments();
-    const totalPages = Math.ceil(totalItems / pageSize);
-    const searchQuery = req.query.search as string || '';
-    let searchQuertCondition = {};
 
-    if (searchQuery) {
-      queryCondition = true;
-      const escapedSearchQuery = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regexPattern = new RegExp(escapedSearchQuery, 'i');
-
-      searchQuertCondition = {
-        $or: [
-          { title: regexPattern },
-          { description: regexPattern },
-          { fiche_technique: regexPattern }
-        ]
-      };
-    }
-    if (queryCondition) {
-      query = {
-        $and: [
-
-          searchQuertCondition
-        ]
-      };
-    }
-    const itemsList = await tunisianet
-      .find(query)
-      .skip((page - 1) * pageSize)
-      .limit(pageSize);
-    if (itemsList.length === 0) {
-      res.status(404).json({ success: false, message: 'No tunisianet found.' });
-    } else {
-      res.json({
-        success: true,
-        totalPages,
-        currentPage: page,
-        itemsList,
-      });
-    }
-  } catch (error) {
-    res.status(500).json({ success: false });
-  }
-})
 router.get(`/item/:id`, async (req: Request, res: Response) => {
   try {
     const item = await tunisianet.findById(req.params.id);

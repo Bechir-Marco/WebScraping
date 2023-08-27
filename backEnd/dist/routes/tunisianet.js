@@ -33,9 +33,15 @@ router.get(`/`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const categoryName = req.query.categoryName || '';
         if (categoryName) {
             queryCondition = true;
-            const escapedCategoryName = categoryName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regexPattern = new RegExp(escapedCategoryName, 'i');
-            categoryCondition = { category: regexPattern };
+            const searchTerms = categoryName.split(/\s+/).map(term => {
+                return term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            const regexPattern = new RegExp(searchTerms.join('|'), 'i');
+            categoryCondition = {
+                $or: [
+                    { category: regexPattern }, { description: regexPattern }
+                ]
+            };
         }
         const searchQuery = req.query.search || '';
         let searchQuertCondition = {};
@@ -55,55 +61,6 @@ router.get(`/`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             query = {
                 $and: [
                     categoryCondition,
-                    searchQuertCondition
-                ]
-            };
-        }
-        const itemsList = yield tunisianet_1.default
-            .find(query)
-            .skip((page - 1) * pageSize)
-            .limit(pageSize);
-        if (itemsList.length === 0) {
-            res.status(404).json({ success: false, message: 'No tunisianet found.' });
-        }
-        else {
-            res.json({
-                success: true,
-                totalPages,
-                currentPage: page,
-                itemsList,
-            });
-        }
-    }
-    catch (error) {
-        res.status(500).json({ success: false });
-    }
-}));
-router.get(`/search`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        let query = {};
-        let queryCondition = false;
-        const pageSize = 10;
-        const page = parseInt(req.query.page) || 1;
-        const totalItems = yield tunisianet_1.default.countDocuments();
-        const totalPages = Math.ceil(totalItems / pageSize);
-        const searchQuery = req.query.search || '';
-        let searchQuertCondition = {};
-        if (searchQuery) {
-            queryCondition = true;
-            const escapedSearchQuery = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regexPattern = new RegExp(escapedSearchQuery, 'i');
-            searchQuertCondition = {
-                $or: [
-                    { title: regexPattern },
-                    { description: regexPattern },
-                    { fiche_technique: regexPattern }
-                ]
-            };
-        }
-        if (queryCondition) {
-            query = {
-                $and: [
                     searchQuertCondition
                 ]
             };

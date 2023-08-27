@@ -15,95 +15,103 @@ interface ProductData {
 }
 
 const JumiaProductForListComponent= () => {
-    const [productData, setProductData] = useState<ProductData[] | null>(null);
-    const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
-  const { id } = useParams<{ id: string; }>();
-  const [searchParams] = useSearchParams();
-  const page = searchParams.get('page');
-  const categoryName = searchParams.get('categoryName');
-  const search = searchParams.get('search');
-  
-  useEffect(() => {
-    let apiUrl = 'http://127.0.0.1:3200/jumia/';
-    const queryString: string[] = [];
+   const [productData, setProductData] = useState<ProductData[] | null>(null);
+   const [showFullDescription, setShowFullDescription] = useState<boolean[]>(
+     []
+   ); // Change to an array
+   const { id } = useParams<{ id: string }>();
+   const [searchParams] = useSearchParams();
+   const page = searchParams.get('page');
+   const categoryName = searchParams.get('categoryName');
+   const search = searchParams.get('search');
 
-    if (categoryName) {
-      queryString.push(`categoryName=${categoryName}`);
-    }
+   useEffect(() => {
+     // Fetch data and initialize visibility state for each product
+     let apiUrl = 'http://127.0.0.1:3200/jumia/';
+     const queryString: string[] = [];
 
-    if (search) {
-      queryString.push(`search=${search}`);
-    }
+     if (categoryName) {
+       queryString.push(`categoryName=${categoryName}`);
+     }
 
-    if (page) {
-      queryString.push(`page=${page}`);
-    }
+     if (search) {
+       queryString.push(`search=${search}`);
+     }
 
-    const joinedQueryString = queryString.join('&');
-    if (joinedQueryString.length > 0) {
-      apiUrl += `?${joinedQueryString}`;
-    }
+     if (page) {
+       queryString.push(`page=${page}`);
+     }
 
-    console.log(apiUrl);
+     const joinedQueryString = queryString.join('&');
+     if (joinedQueryString.length > 0) {
+       apiUrl += `?${joinedQueryString}`;
+     }
 
-    if (id) {
-      apiUrl += `/${id}`;
-    }
+     if (id) {
+       apiUrl += `/${id}`;
+     }
 
-    axios
-      .get(apiUrl)
-      .then((res) => {
-        setProductData(res.data.itemsList);
-        console.log(res);
-      })
-      .catch((error) => {
-        console.error('Error fetching product data:', error);
-      });
-  }, [categoryName, search, page, id]);
+     axios
+       .get(apiUrl)
+       .then((res) => {
+         setProductData(res.data.itemsList);
 
-    if (!productData) {
-      return <div>Loading...</div>;
-    }
-    const handleToggleDescription = () => {
-      setShowFullDescription((prevShowFullDescription) => !prevShowFullDescription);
-    };
-    
+         // Initialize visibility state for each product
+         setShowFullDescription(
+           new Array(res.data.itemsList.length).fill(false)
+         );
+       })
+       .catch((error) => {
+         console.error('Error fetching product data:', error);
+       });
+   }, [categoryName, search, page, id]);
 
-    return (
-      <Card style={{ marginTop: '30px', marginBottom: '50px' }}>
-        {productData.map((item) => (
-          <Row key={item.idx}>
-            <Col>
-              <Card.Img
-                variant="top"
-                src={item.image}
-                style={{ width: '200px', height: '200px' }}
-              />
-            </Col>
-            <Col lg={7}>
-              <Card.Body>
-                <Card.Title>{item.title}</Card.Title>
-                <Card.Text>
-                  {showFullDescription ? item.description : `${item.description.slice(0, 200)}...`}
-                  {!showFullDescription ? (
-                    <Button variant="link" onClick={handleToggleDescription}>
-                      See More
-                    </Button>
-                  ) : (
-                    <Button variant="link" onClick={handleToggleDescription}>
-                      See Less
-                    </Button>
-                  )}
-                </Card.Text>
-                <LinkContainer to={`/jumia/item/${item._id}`}>
-                  <Button variant="danger">See product</Button>
-                </LinkContainer>
-              </Card.Body>
-            </Col>
-          </Row>
-        ))}
-      </Card>
-    );
+   const handleToggleDescription = (index: number) => {
+     setShowFullDescription((prevState) => {
+       const newState = [...prevState];
+       newState[index] = !prevState[index];
+       return newState;
+     });
+   };
+
+   if (!productData) {
+     return <div>Loading...</div>;
+   }
+
+   return (
+     <Card style={{ marginTop: '30px', marginBottom: '50px' }}>
+       {productData.map((item, index) => (
+         <Row key={item.idx}>
+           <Col>
+             <Card.Img
+               variant="top"
+               src={item.image}
+               style={{ width: '200px', height: '200px' }}
+             />
+           </Col>
+           <Col lg={7}>
+             <Card.Body>
+               <Card.Title>{item.title}</Card.Title>
+               <Card.Text>
+                 {showFullDescription[index]
+                   ? item.description
+                   : `${item.description.slice(0, 200)}...`}
+                 <Button
+                   variant="link"
+                   onClick={() => handleToggleDescription(index)}
+                 >
+                   {showFullDescription[index] ? 'See Less' : 'See More'}
+                 </Button>
+               </Card.Text>
+               <LinkContainer to={`/jumia/item/${item._id}`}>
+                 <Button variant="danger">See product</Button>
+               </LinkContainer>
+             </Card.Body>
+           </Col>
+         </Row>
+       ))}
+     </Card>
+   );
   };
 
 

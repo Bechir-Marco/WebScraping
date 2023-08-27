@@ -25,13 +25,14 @@ interface ProductData {
   title: string;
   _id: string;
   fiche_technique: string;
+  moreDetails: string
 }
 const ProductDetailsPage = () => {
   const [productData, setProductData] = useState<ProductData | null>(null);
   const { id } = useParams<{ id: string; }>();
   useEffect(() => {
     if (id) {
-      const apiUrl = `http://127.0.0.1:3200/jumia/item/${id}`;
+      const apiUrl = `http://127.0.0.1:3200/tunisianet/item/${id}`;
 
       axios
         .get(apiUrl)
@@ -60,7 +61,14 @@ const ProductDetailsPage = () => {
   }, [id, productData?.image]);
   
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Container>
         <Row className="mt-5">
           <Col style={{ zIndex: 1 }} md={4}>
@@ -68,7 +76,7 @@ const ProductDetailsPage = () => {
               <Card.Img
                 variant="top"
                 src={productData?.image}
-                style={{  height: '200px', zIndex: 1 }}
+                style={{ height: '200px', zIndex: 1 }}
               />
             </div>
           </Col>
@@ -87,9 +95,12 @@ const ProductDetailsPage = () => {
                   <ListGroup.Item>
                     {productData?.fiche_technique ?? ''}
                   </ListGroup.Item>
+                  <h3>More Details  </h3>
+                  <ListGroup.Item>
+                    {productData?.moreDetails ?? ''}
+                  </ListGroup.Item>
                 </ListGroup>
               </Col>
-              
             </Row>
           </Col>
         </Row>

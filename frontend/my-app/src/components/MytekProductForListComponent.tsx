@@ -16,14 +16,15 @@ interface ProductData {
 
 const MytekProductForListComponent = () => {
   const [productData, setProductData] = useState<ProductData[] | null>(null);
-  const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
-  const { id } = useParams<{ id: string; }>();
+  const [showFullDescription, setShowFullDescription] = useState<boolean[]>([]); // Change to an array
+  const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page');
   const categoryName = searchParams.get('categoryName');
   const search = searchParams.get('search');
 
   useEffect(() => {
+    // Fetch data and initialize visibility state for each product
     let apiUrl = 'http://127.0.0.1:3200/mytek/';
     const queryString: string[] = [];
 
@@ -44,8 +45,6 @@ const MytekProductForListComponent = () => {
       apiUrl += `?${joinedQueryString}`;
     }
 
-    console.log(apiUrl);
-
     if (id) {
       apiUrl += `/${id}`;
     }
@@ -54,24 +53,32 @@ const MytekProductForListComponent = () => {
       .get(apiUrl)
       .then((res) => {
         setProductData(res.data.itemsList);
-        console.log(res);
+
+        // Initialize visibility state for each product
+        setShowFullDescription(
+          new Array(res.data.itemsList.length).fill(false)
+        );
       })
       .catch((error) => {
         console.error('Error fetching product data:', error);
       });
   }, [categoryName, search, page, id]);
 
+  const handleToggleDescription = (index: number) => {
+    setShowFullDescription((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !prevState[index];
+      return newState;
+    });
+  };
+
   if (!productData) {
     return <div>Loading...</div>;
   }
-  const handleToggleDescription = () => {
-    setShowFullDescription((prevShowFullDescription) => !prevShowFullDescription);
-  };
-
 
   return (
     <Card style={{ marginTop: '30px', marginBottom: '50px' }}>
-      {productData.map((item) => (
+      {productData.map((item, index) => (
         <Row key={item.idx}>
           <Col>
             <Card.Img
@@ -84,16 +91,15 @@ const MytekProductForListComponent = () => {
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
               <Card.Text>
-                {showFullDescription ? item.description : `${item.description.slice(0, 200)}...`}
-                {!showFullDescription ? (
-                  <Button variant="link" onClick={handleToggleDescription}>
-                    See More
-                  </Button>
-                ) : (
-                  <Button variant="link" onClick={handleToggleDescription}>
-                    See Less
-                  </Button>
-                )}
+                {showFullDescription[index]
+                  ? item.description
+                  : `${item.description.slice(0, 200)}...`}
+                <Button
+                  variant="link"
+                  onClick={() => handleToggleDescription(index)}
+                >
+                  {showFullDescription[index] ? 'See Less' : 'See More'}
+                </Button>
               </Card.Text>
               <LinkContainer to={`/mytek/item/${item._id}`}>
                 <Button variant="danger">See product</Button>
@@ -106,6 +112,5 @@ const MytekProductForListComponent = () => {
   );
 };
 
-
-
 export default MytekProductForListComponent;
+
