@@ -33,8 +33,10 @@ router.get(`/`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const categoryName = req.query.categoryName || '';
         if (categoryName) {
             queryCondition = true;
-            const escapedCategoryName = categoryName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regexPattern = new RegExp(escapedCategoryName, 'i');
+            const searchTerms = categoryName.split(/\s+/).map(term => {
+                return term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            const regexPattern = new RegExp(searchTerms.join('|'), 'i');
             categoryCondition = {
                 $or: [
                     { category: regexPattern }, { description: regexPattern }

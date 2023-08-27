@@ -321,9 +321,9 @@ const HeaderComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/jumia/?categoryName=${'Santé & Beauté'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Santé & Beauté')}
-                active={storedCategoryName === 'Santé & Beauté'}
+                to={`/jumia/?categoryName=${'maquillage cheveux'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('visage cheveux')}
+                active={storedCategoryName === 'visage cheveux'}
               >
                 Santé & Beauté
               </Dropdown.Item>
@@ -346,19 +346,19 @@ const HeaderComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/jumia/?categoryName=${'Mode'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Mode')}
-                active={storedCategoryName === 'Mode'}
+                to={`/jumia/?categoryName=${'T-shirt jupes'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('T-shirt jupes')}
+                active={storedCategoryName === 'T-shirt jupes'}
               >
                 Mode
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/jumia/?categoryName=${'Maison'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Maison')}
-                active={storedCategoryName === 'Maison'}
+                to={`/jumia/?categoryName=${'électroménager'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('électroménager')}
+                active={storedCategoryName === 'électroménager'}
               >
-                Maison
+                Electroménager
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
@@ -370,11 +370,11 @@ const HeaderComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/jumia/?categoryName=${'Jeux'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Jeux')}
-                active={storedCategoryName === 'Jeux'}
+                to={`/jumia/?categoryName=${'manette playstation'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('manette playstation')}
+                active={storedCategoryName === 'manette playstation'}
               >
-                Jeux
+                Jeux Vidéos
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
@@ -386,9 +386,9 @@ const HeaderComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/jumia/?categoryName=${'Jardin & Plein air'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Jardin & Plein air')}
-                active={storedCategoryName === 'Jardin & Plein air'}
+                to={`/jumia/?categoryName=${'Jardin'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('Jardin')}
+                active={storedCategoryName === 'Jardin'}
               >
                 Jardin & Plein air
               </Dropdown.Item>
@@ -474,19 +474,19 @@ const HeaderComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/mytek/?categoryName=${'Mode'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Mode')}
-                active={storedCategoryName === 'Mode'}
+                to={`/mytek/?categoryName=${'brico jardin'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('brico jardin')}
+                active={storedCategoryName === 'brico jardin'}
               >
                 MAISON | BRICO & ANIMALERIE
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/mytek/?categoryName=${'Nettoyant'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Nettoyant')}
-                active={storedCategoryName === 'Nettoyant'}
+                to={`/mytek/?categoryName=${'rangement meuble '}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('rangement meuble ')}
+                active={storedCategoryName === 'rangement meuble '}
               >
-                Nettoyant et Hygiène Maison
+                Rangement Meuble
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
@@ -498,9 +498,13 @@ const HeaderComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/mytek/?categoryName=${'réseaux'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('réseaux')}
-                active={storedCategoryName === 'réseaux'}
+                to={`/mytek/?categoryName=${'onduleur routeur switcheur biométrie'}&search=${storedSearchValue}`}
+                onClick={() =>
+                  handleDropdownSelect('onduleur routeur switcheur biométrie')
+                }
+                active={
+                  storedCategoryName === 'onduleur routeur switcheur biométrie'
+                }
               >
                 Réseaux ET Sécurité
               </Dropdown.Item>
@@ -522,25 +526,27 @@ const HeaderComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/mytek/?categoryName=${'sports'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('sports')}
-                active={storedCategoryName === 'sports'}
+                to={`/mytek/?categoryName=${'byciclette scooter'}&search=${storedSearchValue}`}
+                onClick={() =>
+                  handleDropdownSelect('byciclette scooter')
+                }
+                active={storedCategoryName === 'byciclette scooter'}
               >
                 Moto | Sport Et Loisirs
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/mytek/?categoryName=${'jouet'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('jouet')}
-                active={storedCategoryName === 'jouet'}
+                to={`/mytek/?categoryName=${'jouets'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('jouets')}
+                active={storedCategoryName === 'jouets'}
               >
                 Jeux et Jouets
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/mytek/?categoryName=${'Bébé'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Bébé')}
-                active={storedCategoryName === 'Bébé'}
+                to={`/mytek/?categoryName=${'Bébés'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('Bébés')}
+                active={storedCategoryName === 'Bébés'}
               >
                 Produits Pour bébés
               </Dropdown.Item>
@@ -569,8 +575,10 @@ const HeaderComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'Accessoires'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Accessoires')}
+                to={`/tunisianet/?categoryName=${'Accessoires souris clavier'}&search=${storedSearchValue}`}
+                onClick={() =>
+                  handleDropdownSelect('Accessoires souris clavier')
+                }
                 active={storedCategoryName === 'Accessoires'}
               >
                 Accessoires ET Peripheriques
@@ -585,9 +593,9 @@ const HeaderComponent = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'Electroménager'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Electroménager')}
-                active={storedCategoryName === 'Electroménager'}
+                to={`/tunisianet/?categoryName=${'laver chauffage'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('laver chauffage')}
+                active={storedCategoryName === 'laver chauffage'}
               >
                 Electroménager
               </Dropdown.Item>
@@ -600,85 +608,83 @@ const HeaderComponent = () => {
               >
                 TV | Photo & Son
               </Dropdown.Item>
+
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'Mode'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Mode')}
-                active={storedCategoryName === 'Mode'}
+                to={`/tunisianet/?categoryName=${'alarme enregistreur détecteur'}&search=${storedSearchValue}`}
+                onClick={() =>
+                  handleDropdownSelect('alarme enregistreur détecteur')
+                }
+                active={storedCategoryName === 'alarme enregistreur détecteur'}
               >
-                MAISON | BRICO & ANIMALERIE
+                Sécurité
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'Nettoyant'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Nettoyant')}
-                active={storedCategoryName === 'Nettoyant'}
-              >
-                Nettoyant et Hygiène Maison
-              </Dropdown.Item>
-              <Dropdown.Item
-                as={Link}
-                to={`/tunisianet/?categoryName=${'imprimante'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('imprimante')}
-                active={storedCategoryName === 'imprimante'}
+                to={`/tunisianet/?categoryName=${'imprimante scanner photocopieur'}&search=${storedSearchValue}`}
+                onClick={() =>
+                  handleDropdownSelect('imprimante scanner photocopieur')
+                }
+                active={
+                  storedCategoryName === 'imprimante scanner photocopieur'
+                }
               >
                 Impression
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'réseaux'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('réseaux')}
-                active={storedCategoryName === 'réseaux'}
+                to={`/tunisianet/?categoryName=${'réseaux switch routeur câble'}&search=${storedSearchValue}`}
+                onClick={() =>
+                  handleDropdownSelect('réseaux switch routeur câble')
+                }
+                active={storedCategoryName === 'réseaux switch routeur câble'}
               >
                 Réseaux ET Sécurité
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'scolaire'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('scolaire')}
-                active={storedCategoryName === 'scolaire'}
+                to={`/tunisianet/?categoryName=${'scolaire papier classement tableaux'}&search=${storedSearchValue}`}
+                onClick={() =>
+                  handleDropdownSelect('scolaire papier classement tableaux')
+                }
+                active={
+                  storedCategoryName === 'scolaire papier classement tableaux'
+                }
               >
                 Bureautique
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'Jardin'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Jardin')}
-                active={storedCategoryName === 'Jardin'}
+                to={`/tunisianet/?categoryName=${'beauté soin'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('beauté soin')}
+                active={storedCategoryName === 'beauté soin'}
               >
-                Jardin & Plein air
+                Entretien - Soin
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'sports'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('sports')}
-                active={storedCategoryName === 'sports'}
+                to={`/tunisianet/?categoryName=${'disque interne externe'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('disque interne externe')}
+                active={storedCategoryName === 'disque interne externe'}
               >
-                Moto | Sport Et Loisirs
+                Disques
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'jouet'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('jouet')}
-                active={storedCategoryName === 'jouet'}
+                to={`/tunisianet/?categoryName=${'Tablette'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('Tablette')}
+                active={storedCategoryName === 'Tablette'}
               >
-                Jeux et Jouets
+                Tablettes
               </Dropdown.Item>
+
               <Dropdown.Item
                 as={Link}
-                to={`/tunisianet/?categoryName=${'Bébé'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Bébé')}
-                active={storedCategoryName === 'Bébé'}
+                to={`/tunisianet/?categoryName=${'console manette'}&search=${storedSearchValue}`}
+                onClick={() => handleDropdownSelect('console manette')}
+                active={storedCategoryName === 'console manette'}
               >
-                Produits Pour bébés
-              </Dropdown.Item>
-              <Dropdown.Item
-                as={Link}
-                to={`/tunisianet/?categoryName=${'Magazine'}&search=${storedSearchValue}`}
-                onClick={() => handleDropdownSelect('Magazine')}
-                active={storedCategoryName === 'Magazine'}
-              >
-                Magazine
+                Console Et Jeux
               </Dropdown.Item>
             </DropdownButton>
           </>
