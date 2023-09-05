@@ -21,3 +21,6 @@ class BookItem(scrapy.Item):
     image = scrapy.Field()
     fiche_technique = scrapy.Field()
     moreDetails = scrapy.Field()
+    details = scrapy.Field()
+    taille = scrapy.Field()
+    composition = scrapy.Field()
